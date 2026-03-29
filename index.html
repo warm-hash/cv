@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历</title>
+    <style>
+        /* 全局样式设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        /* A4纸张设置 */
+        .resume-container {
+            width: 210mm; /* A4宽度 */
+            min-height: 297mm; /* A4高度 */
+            margin: 20px auto;
+            padding: 20mm; /* 2cm边距 */
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        /* 个人信息区域 */
+        .personal-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+        
+        /* 照片上传区域 */
+        .photo-upload {
+            width: 25mm; /* 1寸证件照宽度 */
+            height: 35mm; /* 1寸证件照高度 */
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .photo-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .photo-upload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .photo-upload span {
+            font-size: 10px;
+            text-align: center;
+            color: #999;
+        }
+        
+        /* 个人基本信息 */
+        .basic-info {
+            flex: 1;
+            margin-left: 30px;
+        }
+        
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .job-title {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        /* 模块通用样式 */
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            border-left: 4px solid #333;
+        }
+        
+        /* 求职意向 */
+        .objective {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* 工作经历 */
+        .experience-item {
+            margin-bottom: 15px;
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .company {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .period {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .position {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .experience-content {
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: justify;
+            padding-left: 10px;
+        }
+        
+        /* 项目经历 */
+        .project-item {
+            margin-bottom: 15px;
+        }
+        
+        .project-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .project-content {
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: justify;
+            padding-left: 10px;
+        }
+        
+        /* 教育背景 */
+        .education-item {
+            margin-bottom: 10px;
+        }
+        
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+        
+        .school {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .degree {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* 技能 */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-item {
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        /* 证书 */
+        .certificate-item {
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        /* 打印样式 */
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .resume-container {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 20mm;
+                box-shadow: none;
+            }
+            
+            .photo-upload {
+                border: 1px solid #ddd;
+            }
+        }
+        
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            .resume-container {
+                width: 100%;
+                padding: 10mm;
+                margin: 0;
+            }
+            
+            .personal-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .basic-info {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- 个人信息区域 -->
+        <div class="personal-info">
+            <!-- 照片上传位置 -->
+            <div class="photo-upload">
+                <input type="file" id="photo-upload" accept="image/*">
+                <img id="preview-image" src="" alt="证件照" style="display: none;">
+                <span>点击上传<br>1寸证件照</span>
+            </div>
+            
+            <!-- 基本信息 -->
+            <div class="basic-info">
+                <div class="name">徐慧凤</div>
+                <div class="job-title">求职意向：数据开发    随时到岗</div>
+                <div class="contact-info">
+                    20岁    女    重庆<br>
+                    电话：19102387985<br>
+                    邮箱：3101323809@qq.com
+                </div>
+            </div>
+        </div>
+        
+
+        
+        <!-- 教育背景 -->
+        <div class="section">
+            <div class="section-title">教育背景</div>
+            
+            <div class="education-item">
+                <div class="education-header">
+                    <div class="school">重庆理工大学</div>
+                    <div class="period">2023.09 ~ 2027.07</div>
+                </div>
+                <div class="degree">应用统计学（本科）</div>
+                <div class="experience-content">
+                    <p>- 主修课程：多元数据统计分析、应用回归分析、抽样调查技术及应用、概率论、SQL语言与数据分析、R语言编程与可视化、统计机器学习</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 技能特长 -->
+        <div class="section">
+            <div class="section-title">技能特长</div>
+            <div class="experience-content">
+                <p><strong>数据分析：</strong>Python（Pandas、NumPy、Matplotlib、Seaborn）、R（dplyr、ggplot2、tidyr）、SPSS</p>
+                <p><strong>数据库与大数据：</strong>MySQL、Hadoop（HDFS）、Elasticsearch</p>
+                <p><strong>其他：</strong>Linux、Shell脚本、Docker</p>
+            </div>
+        </div>
+        
+        <!-- 校园经历 -->
+        <div class="section">
+            <div class="section-title">校园经历</div>
+            
+            <div class="project-item">
+                <div class="project-name">重庆理工大学官方媒体账号运营 | 2023.09 - 至今</div>
+                <div class="project-content">
+                    <p>- 负责学校官方微信公众号、微博等平台的内容策划与发布，累计发布文章100+篇</p>
+                    <p>- 运用数据分析工具对用户阅读习惯进行分析，优化内容推送策略，粉丝增长率提升25%</p>
+                    <p>- 组织策划校园活动线上宣传，参与活动的学生人数超过3000人次</p>
+                    <p>- 负责媒体账号的日常运营与维护，确保平台内容的及时性和准确性</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 项目经历 -->
+        <div class="section">
+            <div class="section-title">项目经历</div>
+            
+            <div class="project-item">
+                <div class="project-name">重庆市九龙坡区中医院血液科智慧医疗服务平台 | 2024.03 - 2024.06</div>
+                <div class="project-content">
+                    <p>- 基于 FastAPI 构建核心业务微服务，划分为医生管理、病人管理、排班等独立模块，通过 Docker 容器化部署</p>
+                    <p>- 集成 JWT 实现用户认证与权限隔离，支持医生、管理员、病人三类角色的权限控制</p>
+                    <p>- 采用 Redis 集群缓存热点数据，通过布隆过滤器预防缓存穿透，将核心查询接口响应时间控制在 150ms 以内</p>
+                    <p>- 基于遗传算法实现智能排班系统，综合考虑医生职称、擅长领域、工作时长等因素</p>
+                    <p>- 采用 MySQL 分表设计处理就诊记录等海量数据，引入 Elasticsearch 实现就诊记录全文检索</p>
+                </div>
+                <div class="period">技术栈：Python、FastAPI、MySQL、Elasticsearch、Docker、Redis、JWT</div>
+            </div>
+        </div>
+        
+        <!-- 自我评价 -->
+        <div class="section">
+            <div class="section-title">自我评价</div>
+            <div class="experience-content">
+                <p>具备扎实的数据分析与大数据处理能力，熟练掌握Python、R、SPSS 及 Hadoop 生态体系，能够独立完成从数据采集、清洗、建模到可视化呈现的全流程工作。善于从业务角度出发挖掘数据价值，输出可落地的分析报告。具备良好的编程习惯与文档撰写能力，责任心强，乐于协作，对数据驱动的业务决策有深入理解。</p>
+            </div>
+        </div>
+        
+
+    </div>
+    
+    <script>
+        // 照片上传功能
+        document.getElementById('photo-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('preview-image');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    document.querySelector('.photo-upload span').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
